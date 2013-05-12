@@ -284,6 +284,21 @@
 	}
 }
 
+- (BOOL)canBecomeFirstResponder
+{
+	return [internalTextView canBecomeFirstResponder];
+}
+
+- (BOOL)becomeFirstResponder
+{
+	return [internalTextView becomeFirstResponder];
+}
+
+- (BOOL)canResignFirstResponder
+{
+	return [internalTextView canResignFirstResponder];
+}
+
 -(BOOL)resignFirstResponder
 {
 	[super resignFirstResponder];
