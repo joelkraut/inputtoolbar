@@ -91,6 +91,15 @@
     return self;
 }
 
+- (void)setFrame:(CGRect)frame
+{
+	[super setFrame:frame];
+	
+	CGRect textFrame = self.textView.frame;
+	textFrame.size.width = MAX(236, frame.size.width - textFrame.origin.x - self.inputButton.customView.frame.size.width - 45);
+	self.textView.frame = textFrame;
+}
+
 -(id)init
 {
     if ((self = [super init])) {
@@ -107,7 +116,7 @@
     [backgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     
     CGRect i = self.inputButton.customView.frame;
-    i.origin.y = self.frame.size.height - i.size.height - 7;
+    i.origin.y = self.frame.size.height - i.size.height - 11;
     self.inputButton.customView.frame = i;
 }
 
