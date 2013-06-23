@@ -162,7 +162,7 @@
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
     internalTextView.text     = newText;
-	float height = [internalTextView.text sizeWithFont:internalTextView.font].height;
+	float height = [internalTextView.text sizeWithFont:internalTextView.font constrainedToSize:CGSizeMake(200, INFINITY)].height;
     didChange = (maximumHeight != height);
     maximumHeight             = height;
     maximumNumberOfLines      = n;
