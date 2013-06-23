@@ -109,8 +109,6 @@
         [self addSubview:internalTextView];
 
         /* Calculate the text view height */
-		UIView *internal = (UIView*)[[internalTextView subviews] objectAtIndex:0];
-		minimumHeight = internal.frame.size.height;
 		[self setMinimumNumberOfLines:1];
 		animateHeightChange = YES;
 		internalTextView.text = @"";
@@ -164,8 +162,9 @@
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
     internalTextView.text     = newText;
-    didChange = (maximumHeight != internalTextView.contentSize.height);
-    maximumHeight             = internalTextView.contentSize.height;
+	float height = [internalTextView.text sizeWithFont:internalTextView.font].height;
+    didChange = (maximumHeight != height);
+    maximumHeight             = height;
     maximumNumberOfLines      = n;
     internalTextView.text     = saveText;
     internalTextView.hidden   = NO;
@@ -187,7 +186,7 @@
         newText = [newText stringByAppendingString:@"\n|W|"];
     }
     internalTextView.text     = newText;
-    minimumHeight             = internalTextView.contentSize.height;
+    minimumHeight             = MAX(35, internalTextView.contentSize.height);
     internalTextView.text     = saveText;
     internalTextView.hidden   = NO;
     internalTextView.delegate = self;
@@ -203,7 +202,7 @@
     else
         placeholderLabel.alpha = 0;
     
-	NSInteger newHeight = internalTextView.contentSize.height;
+	NSInteger newHeight = [internalTextView.text sizeWithFont:internalTextView.font constrainedToSize:CGSizeMake(internalTextView.bounds.size.width - kTextInsetX, INFINITY) lineBreakMode:NSLineBreakByWordWrapping].height + 18;
     
 	if(newHeight < minimumHeight || !internalTextView.hasText)
     {
