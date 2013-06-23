@@ -56,7 +56,7 @@
     button.titleLabel.font         = [UIFont boldSystemFontOfSize:15.0f];
     button.titleLabel.shadowOffset = CGSizeMake(0, -1);
     button.titleEdgeInsets         = UIEdgeInsetsMake(0, 2, 0, 2);
-    button.contentStretch          = CGRectMake(0.5, 0.5, 0, 0);
+//    button.contentStretch          = CGRectMake(0.5, 0.5, 0, 0);
     button.contentMode             = UIViewContentModeScaleToFill;
     
     [button setBackgroundImage:buttonImage forState:UIControlStateNormal];
