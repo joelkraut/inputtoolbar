@@ -133,6 +133,9 @@
 
 -(void)setFrame:(CGRect)aframe
 {
+	if (CGRectEqualToRect(aframe, self.frame))
+		return;
+	
     CGRect backgroundFrame   = aframe;
     backgroundFrame.origin.y = 0;
     backgroundFrame.origin.x = 0;
@@ -202,7 +205,7 @@
     else
         placeholderLabel.alpha = 0;
     
-	NSInteger newHeight = [internalTextView.text sizeWithFont:internalTextView.font constrainedToSize:CGSizeMake(internalTextView.bounds.size.width - kTextInsetX, INFINITY) lineBreakMode:NSLineBreakByWordWrapping].height + 18;
+	NSInteger newHeight = [internalTextView.text sizeWithFont:internalTextView.font constrainedToSize:CGSizeMake(internalTextView.bounds.size.width - kTextInsetX - 10, INFINITY) lineBreakMode:NSLineBreakByWordWrapping].height + 18;
     
 	if(newHeight < minimumHeight || !internalTextView.hasText)
     {
