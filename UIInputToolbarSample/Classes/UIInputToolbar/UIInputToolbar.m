@@ -122,6 +122,7 @@
 
 - (void)dealloc
 {
+	textView.delegate = nil;
     [textView release];
     [inputButton release];
     [super dealloc];
