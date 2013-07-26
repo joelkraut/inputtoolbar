@@ -112,7 +112,7 @@
 {
     /* Draw custon toolbar background */
     UIImage *backgroundImage = [UIImage imageNamed:@"toolbarbg.png"];
-    backgroundImage = [backgroundImage stretchableImageWithLeftCapWidth:floorf(backgroundImage.size.width/2) topCapHeight:floorf(backgroundImage.size.height/2)];
+    backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(backgroundImage.size.height / 2 - 1, backgroundImage.size.width / 2 - 1, backgroundImage.size.height / 2, backgroundImage.size.width / 2)];
     [backgroundImage drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     
     CGRect i = self.inputButton.customView.frame;

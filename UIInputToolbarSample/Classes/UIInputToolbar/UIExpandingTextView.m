@@ -204,9 +204,25 @@
         placeholderLabel.alpha = 1;
     else
         placeholderLabel.alpha = 0;
-    
-	NSInteger newHeight = [internalTextView.text sizeWithFont:internalTextView.font constrainedToSize:CGSizeMake(internalTextView.bounds.size.width - kTextInsetX - 10, INFINITY) lineBreakMode:NSLineBreakByWordWrapping].height + 18;
-    
+	
+	NSInteger newHeight;
+#ifdef __IPHONE_7_0
+	if (DeviceSystemMajorVersion() >= 7)
+		newHeight = [internalTextView.layoutManager usedRectForTextContainer:internalTextView.textContainer].size.height;
+	else
+#endif
+	{
+		float width = internalTextView.bounds.size.width;
+		width -= internalTextView.contentInset.left;
+		width -= internalTextView.contentInset.right;
+		// hack
+		width -= 15;
+		NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:internalTextView.text attributes:@{NSFontAttributeName : internalTextView.font}];
+		newHeight = [attrString boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingUsesDeviceMetrics context:nil].size.height;
+	}
+	
+    newHeight += 18;
+	
 	if(newHeight < minimumHeight || !internalTextView.hasText)
     {
         newHeight = minimumHeight;
