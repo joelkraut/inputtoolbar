@@ -216,7 +216,7 @@
 		width -= internalTextView.contentInset.left;
 		width -= internalTextView.contentInset.right;
 		// hack
-		width -= 15;
+		width -= 16;
 		NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:internalTextView.text attributes:@{NSFontAttributeName : internalTextView.font}];
 		newHeight = [attrString boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingUsesDeviceMetrics context:nil].size.height;
 	}
